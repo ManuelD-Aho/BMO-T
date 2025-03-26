@@ -1,29 +1,45 @@
-FROM openjdk:22-slim
+# Dockerfile pour BMO Meet
+FROM openjdk:17-jdk-slim as build
 
-# Installer wget, unzip et les dépendances pour JavaFX (GTK, X11, etc.)
-RUN apt-get update && apt-get install -y \
-    wget \
-    unzip \
-    libgtk-3-0 \
-    libgl1-mesa-glx \
-    libxi6 \
-    libxrender1 \
-    libxtst6 \
-    libnss3 \
-    && rm -rf /var/lib/apt/lists/*
+# Répertoire de travail
+WORKDIR /app
 
-# Télécharger JavaFX SDK 23.0.2 et l'extraire dans /opt/javafx
-RUN wget https://download2.gluonhq.com/openjfx/23.0.2/openjfx-23.0.2_linux-x64_bin-sdk.zip -O openjfx.zip && \
-    unzip openjfx.zip -d /opt/javafx && \
-    rm openjfx.zip
+# Copier les fichiers Maven
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+COPY src src
+
+# Rendre le script Maven exécutable
+RUN chmod +x ./mvnw
+
+# Construire l'application
+RUN ./mvnw clean package -DskipTests
+
+# Image finale
+FROM openjdk:17-jdk-slim
+
+# Installation de JavaFX
+RUN apt-get update && apt-get install -y wget unzip && \
+    wget https://download2.gluonhq.com/openjfx/17/openjfx-17-linux-x64_bin-sdk.zip && \
+    unzip openjfx-17-linux-x64_bin-sdk.zip && \
+    mv javafx-sdk-17 /opt/javafx-sdk-17 && \
+    rm openjfx-17-linux-x64_bin-sdk.zip && \
+    apt-get remove -y wget unzip && \
+    apt-get autoremove -y && \
+    apt-get clean
+
+# Définir les variables d'environnement
+ENV JAVAFX_HOME=/opt/javafx-sdk-17
+ENV PATH_TO_FX=$JAVAFX_HOME/lib
 
 WORKDIR /app
 
-# Copier le JAR exécutable généré par Maven dans le conteneur
-COPY target/BMO-T-1.0-SNAPSHOT-jar-with-dependencies.jar app.jar
+# Copier le JAR compilé
+COPY --from=build /app/target/bmot-1.0-SNAPSHOT.jar /app/bmot.jar
 
-# Exposer le port de l'application
-EXPOSE 5002
+# Ports exposés
+EXPOSE 8888
 
-# Lancer l'application en indiquant le module-path vers les librairies JavaFX
-ENTRYPOINT ["java", "--module-path", "/opt/javafx/javafx-sdk-23.0.2/lib", "--add-modules", "javafx.controls,javafx.fxml", "-jar", "app.jar"]
+# Point d'entrée pour le serveur
+CMD ["java", "--module-path", "$PATH_TO_FX", "--add-modules", "javafx.controls,javafx.fxml,javafx.swing", "-jar", "bmot.jar", "--server"]

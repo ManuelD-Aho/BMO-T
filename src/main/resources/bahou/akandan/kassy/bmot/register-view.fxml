@@ -10,7 +10,7 @@
 <?import java.net.URL?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="bahou.akandan.kassy.bmot.LoginController"
+            fx:controller="bahou.akandan.kassy.bmot.RegisterController"
             prefHeight="600.0" prefWidth="800.0"
             styleClass="background">
 
@@ -36,7 +36,7 @@
         <VBox alignment="CENTER" spacing="20" styleClass="login-form">
             <padding><Insets top="20" bottom="20" left="50" right="50"/></padding>
 
-            <Label text="Connexion" styleClass="section-title">
+            <Label text="Créer un compte" styleClass="section-title">
                 <font>
                     <Font size="20.0"/>
                 </font>
@@ -44,10 +44,13 @@
 
             <TextField fx:id="loginField" promptText="Nom d'utilisateur" styleClass="text-field"/>
             <PasswordField fx:id="passwordField" promptText="Mot de passe" styleClass="password-field"/>
+            <PasswordField fx:id="confirmPasswordField" promptText="Confirmer le mot de passe" styleClass="password-field"/>
+            <TextField fx:id="nomField" promptText="Nom" styleClass="text-field"/>
+            <TextField fx:id="prenomField" promptText="Prénom" styleClass="text-field"/>
 
             <HBox spacing="10" alignment="CENTER">
-                <Button text="Se connecter" onAction="#handleLogin" styleClass="primary-button"/>
-                <Button text="S'inscrire" onAction="#handleRegister" styleClass="secondary-button"/>
+                <Button fx:id="registerButton" text="S'inscrire" styleClass="primary-button"/>
+                <Button fx:id="backButton" text="Retour" styleClass="secondary-button"/>
             </HBox>
 
             <Label fx:id="statusLabel" styleClass="status-label"/>
