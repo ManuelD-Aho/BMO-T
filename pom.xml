@@ -56,62 +56,34 @@
 
     <build>
         <plugins>
-            <!-- Plugin de compilation (Java 22) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>bahou.akandan.kassy.bmot.VideoConferenceApp</mainClass>
+                                </transformer>
+                            </transformers>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
-
-            <!-- Plugin JavaFX pour exécution en mode développement -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
-                <executions>
-                    <execution>
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>${main.class}</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Plugin d'assembly pour générer un uber-jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.6.0</version>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <archive>
-                                <manifest>
-                                    <mainClass>${main.class}</mainClass>
-                                </manifest>
-                            </archive>
-                            <descriptorRefs>
-                                <descriptorRef>jar-with-dependencies</descriptorRef>
-                            </descriptorRefs>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+                    <mainClass>bahou.akandan.kassy.bmot.VideoConferenceApp</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

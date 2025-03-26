@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="bahou.akandan.kassy.bmot.HomeController"
+            prefHeight="768.0" prefWidth="1024.0"
+            styleClass="background">
+
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="header">
+            <padding><Insets top="10" bottom="10" left="20" right="20"/></padding>
+            <ImageView fitHeight="30" fitWidth="30" preserveRatio="true">
+                <Image url="@images/meet_icon.png"/>
+            </ImageView>
+            <Label text="BMO Meet" styleClass="app-title">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="userLabel" styleClass="user-label"/>
+            <Button fx:id="profileButton" styleClass="icon-button">
+                <graphic>
+                    <ImageView fitHeight="30" fitWidth="30" preserveRatio="true">
+                        <Image url="@images/profile_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="5" styleClass="sidebar" prefWidth="250">
+            <padding><Insets top="10" bottom="10" left="10" right="10"/></padding>
+
+            <Button text="Nouvelle réunion" onAction="#handleNewMeeting" styleClass="primary-button">
+                <graphic>
+                    <ImageView fitHeight="16" fitWidth="16">
+                        <Image url="@images/video_add_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button text="Rejoindre avec un code" onAction="#handleJoinMeeting" styleClass="secondary-button">
+                <graphic>
+                    <ImageView fitHeight="16" fitWidth="16">
+                        <Image url="@images/join_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Separator/>
+
+            <Label text="Réunions à venir" styleClass="section-label"/>
+            <ListView fx:id="upcomingMeetingsListView" VBox.vgrow="ALWAYS" styleClass="meeting-list"/>
+
+            <Separator/>
+
+            <Button text="Déconnexion" onAction="#handleLogout" styleClass="text-button">
+                <graphic>
+                    <ImageView fitHeight="16" fitWidth="16">
+                        <Image url="@images/logout_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane>
+            <VBox alignment="CENTER" spacing="20" styleClass="welcome-screen">
+                <padding><Insets top="50" bottom="50" left="50" right="50"/></padding>
+
+                <ImageView fitHeight="200" fitWidth="200" preserveRatio="true">
+                    <Image url="@images/welcome_illustration.png"/>
+                </ImageView>
+
+                <Label text="Bienvenue sur BMO Meet" styleClass="welcome-title">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Label>
+
+                <Label text="Créez ou rejoignez une réunion pour commencer" styleClass="welcome-subtitle"/>
+
+                <HBox spacing="20" alignment="CENTER">
+                    <Button text="Nouvelle réunion" onAction="#handleNewMeeting" styleClass="large-primary-button">
+                        <graphic>
+                            <ImageView fitHeight="24" fitWidth="24">
+                                <Image url="@images/video_add_icon.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+
+                    <Button text="Rejoindre une réunion" onAction="#handleJoinMeeting" styleClass="large-secondary-button">
+                        <graphic>
+                            <ImageView fitHeight="24" fitWidth="24">
+                                <Image url="@images/join_icon.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

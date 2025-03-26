@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="bahou.akandan.kassy.bmot.MeetingRoomController"
+            prefHeight="768.0" prefWidth="1024.0"
+            styleClass="meeting-room">
+
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="meeting-header">
+            <padding><Insets top="10" bottom="10" left="20" right="20"/></padding>
+            <Label fx:id="meetingTitleLabel" styleClass="meeting-title"/>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="meetingTimeLabel" styleClass="meeting-time"/>
+            <Button fx:id="infoButton" styleClass="icon-button">
+                <graphic>
+                    <ImageView fitHeight="24" fitWidth="24">
+                        <Image url="@images/info_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <center>
+        <StackPane>
+            <GridPane fx:id="videoGrid" alignment="CENTER" hgap="10" vgap="10" styleClass="video-grid">
+                <padding><Insets top="20" bottom="20" left="20" right="20"/></padding>
+                <!-- Les vidéos des participants seront ajoutées dynamiquement ici -->
+            </GridPane>
+
+            <VBox fx:id="waitingOverlay" alignment="CENTER" spacing="20" styleClass="waiting-overlay" visible="false">
+                <Label text="En attente de participants..." styleClass="waiting-text">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Label>
+                <ProgressIndicator/>
+            </VBox>
+        </StackPane>
+    </center>
+
+    <right>
+        <VBox fx:id="sidePanel" prefWidth="300" styleClass="side-panel">
+            <TabPane tabClosingPolicy="UNAVAILABLE">
+                <Tab text="Participants">
+                    <VBox spacing="10" styleClass="participants-panel">
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="panel-header">
+                            <Label text="Participants"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="participantCountLabel" text="(0)"/>
+                        </HBox>
+                        <ListView fx:id="participantsListView" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </Tab>
+                <Tab text="Chat">
+                    <VBox spacing="10" styleClass="chat-panel">
+                        <TextArea fx:id="chatArea" VBox.vgrow="ALWAYS" editable="false" wrapText="true"/>
+                        <HBox spacing="5">
+                            <TextField fx:id="messageField" HBox.hgrow="ALWAYS" promptText="Envoyer un message..."/>
+                            <Button onAction="#handleSendMessage" styleClass="send-button">
+                                <graphic>
+                                    <ImageView fitHeight="16" fitWidth="16">
+                                        <Image url="@images/send_icon.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </VBox>
+                </Tab>
+            </TabPane>
+        </VBox>
+    </right>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="20" styleClass="meeting-controls">
+            <padding><Insets top="10" bottom="10" left="20" right="20"/></padding>
+
+            <Button fx:id="micButton" onAction="#handleToggleMic" styleClass="control-button">
+                <graphic>
+                    <ImageView fx:id="micIcon" fitHeight="24" fitWidth="24">
+                        <Image url="@images/mic_on_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button fx:id="cameraButton" onAction="#handleToggleCamera" styleClass="control-button">
+                <graphic>
+                    <ImageView fx:id="cameraIcon" fitHeight="24" fitWidth="24">
+                        <Image url="@images/camera_on_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button fx:id="screenShareButton" onAction="#handleToggleScreenShare" styleClass="control-button">
+                <graphic>
+                    <ImageView fx:id="screenShareIcon" fitHeight="24" fitWidth="24">
+                        <Image url="@images/screen_share_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button fx:id="toggleChatButton" onAction="#handleToggleChat" styleClass="control-button">
+                <graphic>
+                    <ImageView fx:id="chatIcon" fitHeight="24" fitWidth="24">
+                        <Image url="@images/chat_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Button fx:id="toggleParticipantsButton" onAction="#handleToggleParticipants" styleClass="control-button">
+                <graphic>
+                    <ImageView fx:id="participantsIcon" fitHeight="24" fitWidth="24">
+                        <Image url="@images/people_icon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button fx:id="leaveButton" onAction="#handleLeaveMeeting" styleClass="leave-button">
+                <graphic>
+                    <ImageView fitHeight="24" fitWidth="24">
+                        <Image url="@images/leave_icon.png"/>
+                    </ImageView>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="Quitter la réunion"/>
+                </tooltip>
+            </Button>
+        </HBox>
+    </bottom>
+</BorderPane>

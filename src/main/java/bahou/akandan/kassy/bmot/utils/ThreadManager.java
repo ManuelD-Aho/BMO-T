@@ -5,27 +5,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class ThreadManager {
+    private static ExecutorService executor = Executors.newCachedThreadPool();
 
-    // Taille du pool de threads : on peut la fixer ou la récupérer de config.properties
-    private static final int POOL_SIZE = 10;
-    private static final ExecutorService executor = Executors.newFixedThreadPool(POOL_SIZE);
-
-    /**
-     * Soumet une tâche à exécuter dans le pool de threads.
-     * @param runnable Tâche à exécuter.
-     */
-    public static void submitTask(Runnable runnable) {
-        executor.submit(runnable);
+    public static void executer(Runnable task) {
+        executor.execute(task);
     }
 
-    /**
-     * Arrête correctement le pool de threads (utile lors de l'arrêt du serveur).
-     */
-    public static void shutdown() {
+    public static void arreter() {
         executor.shutdown();
         try {
-            // On attend la fin des tâches en cours (ou un timeout)
-            if (!executor.awaitTermination(30, TimeUnit.SECONDS)) {
+            if (!executor.awaitTermination(15, TimeUnit.SECONDS)) {
                 executor.shutdownNow();
             }
         } catch (InterruptedException e) {

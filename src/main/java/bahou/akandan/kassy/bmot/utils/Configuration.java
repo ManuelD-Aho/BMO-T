@@ -1,33 +1,34 @@
 package bahou.akandan.kassy.bmot.utils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class Configuration {
-    private static Properties props = new Properties();
+    private static Properties properties = new Properties();
+    private static final String CONFIG_FILE = "src/main/resources/bahou/akandan/kassy/bmot/config.properties";
 
     static {
-        try (InputStream in = Configuration.class.getResourceAsStream("/bahou/akandan/kassy/bmot/config.properties")) {
-            if (in != null) {
-                props.load(in);
-            } else {
-                System.err.println("Fichier config.properties non trouvé !");
-            }
+        try (FileInputStream fis = new FileInputStream(CONFIG_FILE)) {
+            properties.load(fis);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Erreur lors du chargement du fichier de configuration: " + e.getMessage());
+            // Valeurs par défaut
+            properties.setProperty("serveur.port", "8888");
+            properties.setProperty("serveur.timeout", "60000");
+            properties.setProperty("serveur.maxConnexions", "100");
         }
     }
 
-    public static String getString(String key, String defaultValue) {
-        return props.getProperty(key, defaultValue);
+    public static int getPort() {
+        return Integer.parseInt(properties.getProperty("serveur.port", "8888"));
     }
 
-    public static int getInt(String key, int defaultValue) {
-        try {
-            return Integer.parseInt(props.getProperty(key, String.valueOf(defaultValue)));
-        } catch (NumberFormatException e) {
-            return defaultValue;
-        }
+    public static int getTimeout() {
+        return Integer.parseInt(properties.getProperty("serveur.timeout", "60000"));
+    }
+
+    public static int getMaxConnexions() {
+        return Integer.parseInt(properties.getProperty("serveur.maxConnexions", "100"));
     }
 }

@@ -1,100 +1,276 @@
 /* Styles généraux */
-.root {
-    -fx-background-color: #f1f3f4;
-    -fx-font-family: 'Google Sans', Arial, sans-serif;
+.background {
+    -fx-background-color: #f6f6f6;
 }
 
-/* Barre supérieure */
-.top-bar {
+.header {
     -fx-background-color: white;
-    -fx-padding: 10px;
-    -fx-alignment: center-left;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.footer {
+    -fx-background-color: #f6f6f6;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 10;
 }
 
 .app-title {
-    -fx-font-size: 18px;
+    -fx-text-fill: #1a73e8;
     -fx-font-weight: bold;
-    -fx-text-fill: #5f6368;
 }
 
-.new-meeting-btn {
+/* Styles de connexion */
+.login-form {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #e0e0e0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);
+    -fx-max-width: 400px;
+    -fx-padding: 30;
+}
+
+.section-title {
+    -fx-text-fill: #202124;
+    -fx-font-weight: bold;
+}
+
+.text-field, .password-field {
+    -fx-background-color: #f6f6f6;
+    -fx-background-radius: 4px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 4px;
+    -fx-padding: 10;
+    -fx-prompt-text-fill: #5f6368;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #1a73e8;
+}
+
+.primary-button {
     -fx-background-color: #1a73e8;
     -fx-text-fill: white;
-    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
 }
 
-.join-btn {
-    -fx-background-color: transparent;
+.secondary-button {
+    -fx-background-color: white;
     -fx-text-fill: #1a73e8;
     -fx-border-color: #1a73e8;
     -fx-border-radius: 4px;
-    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
 }
 
-/* Conteneur vidéo */
-.video-container {
-    -fx-background-color: #202124;
-    -fx-alignment: center;
-    -fx-padding: 20px;
+.primary-button:hover {
+    -fx-background-color: #1765cc;
 }
 
-.meeting-controls {
-    -fx-background-color: rgba(32, 33, 36, 0.8);
-    -fx-padding: 10px;
-    -fx-alignment: center;
-    -fx-spacing: 15px;
+.secondary-button:hover {
+    -fx-background-color: #f1f8ff;
 }
 
-.control-btn {
-    -fx-background-color: rgba(255, 255, 255, 0.1);
-    -fx-background-radius: 50%;
-    -fx-pref-width: 50px;
-    -fx-pref-height: 50px;
+.status-label {
+    -fx-text-fill: #d93025;
 }
 
-.end-call-btn {
-    -fx-background-color: #ea4335;
-    -fx-text-fill: white;
-}
-
-/* Panneau des participants */
-.participants-panel {
+/* Styles de l'écran d'accueil */
+.sidebar {
     -fx-background-color: white;
-    -fx-border-color: #dadce0;
-    -fx-border-width: 0 0 0 1px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 1 0 0;
+}
+
+.welcome-screen {
+    -fx-background-color: white;
+}
+
+.welcome-title {
+    -fx-text-fill: #1a73e8;
+    -fx-font-weight: bold;
+}
+
+.welcome-subtitle {
+    -fx-text-fill: #5f6368;
+}
+
+.large-primary-button {
+    -fx-background-color: #1a73e8;
+    -fx-text-fill: white;
+    -fx-padding: 15 30;
+    -fx-background-radius: 30px;
+    -fx-cursor: hand;
+}
+
+.large-secondary-button {
+    -fx-background-color: white;
+    -fx-text-fill: #1a73e8;
+    -fx-border-color: #1a73e8;
+    -fx-padding: 15 30;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-cursor: hand;
+}
+
+.meeting-list {
+    -fx-background-color: transparent;
+}
+
+.meeting-list-item {
+    -fx-padding: 10;
+    -fx-background-color: white;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-border-color: #e0e0e0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 1);
+}
+
+.meeting-title {
+    -fx-font-weight: bold;
+    -fx-text-fill: #202124;
+}
+
+.meeting-time {
+    -fx-text-fill: #5f6368;
+}
+
+.action-button {
+    -fx-background-color: #1a73e8;
+    -fx-text-fill: white;
+    -fx-padding: 5 10;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+}
+
+.edit-button {
+    -fx-background-color: white;
+    -fx-text-fill: #1a73e8;
+    -fx-border-color: #1a73e8;
+    -fx-padding: 5 10;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-cursor: hand;
+}
+
+.section-label {
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 5 0;
+}
+
+.text-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1a73e8;
+    -fx-cursor: hand;
+    -fx-padding: 5;
+}
+
+.text-button:hover {
+    -fx-background-color: #f1f8ff;
+}
+
+/* Styles de la salle de réunion */
+.meeting-room {
+    -fx-background-color: #202124;
+}
+
+.meeting-header {
+    -fx-background-color: #202124;
+    -fx-border-color: #3c4043;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10 20;
+}
+
+.meeting-title {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.meeting-time {
+    -fx-text-fill: #9aa0a6;
+}
+
+.video-grid {
+    -fx-background-color: #202124;
+    -fx-padding: 10;
+}
+
+.video-cell {
+    -fx-background-color: #3c4043;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+}
+
+.video-username {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(0,0,0,0.5);
+    -fx-padding: 5 10;
+    -fx-background-radius: 4px;
+}
+
+.side-panel {
+    -fx-background-color: #292a2d;
+}
+
+.participants-panel, .chat-panel {
+    -fx-background-color: #292a2d;
+    -fx-padding: 10;
 }
 
 .panel-header {
-    -fx-padding: 10px;
-    -fx-alignment: center-left;
+    -fx-padding: 10 0;
+    -fx-border-color: #3c4043;
+    -fx-border-width: 0 0 1 0;
 }
 
-.panel-title {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
+.meeting-controls {
+    -fx-background-color: #202124;
+    -fx-border-color: #3c4043;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 10 20;
 }
 
-.add-participant-btn {
-    -fx-background-color: transparent;
-    -fx-text-fill: #1a73e8;
+.control-button {
+    -fx-background-color: #3c4043;
+    -fx-background-radius: 50%;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-max-width: 48px;
+    -fx-max-height: 48px;
+    -fx-cursor: hand;
 }
 
-/* Chat */
-.chat-container {
-    -fx-background-color: #f8f9fa;
-    -fx-padding: 10px;
+.control-button:hover {
+    -fx-background-color: #4d5256;
 }
 
-.chat-title {
-    -fx-font-weight: bold;
-    -fx-padding: 0 0 10px 0;
+.control-button-disabled {
+    -fx-background-color: #d93025;
 }
 
-.chat-input-container {
-    -fx-padding: 10px 0 0 0;
+.leave-button {
+    -fx-background-color: #d93025;
+    -fx-background-radius: 50%;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-max-width: 48px;
+    -fx-max-height: 48px;
+    -fx-cursor: hand;
 }
 
-.send-chat-btn {
-    -fx-background-color: #1a73e8;
+.leave-button:hover {
+    -fx-background-color: #b3261e;
+}
+
+.waiting-overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+
+.waiting-text {
     -fx-text-fill: white;
 }
