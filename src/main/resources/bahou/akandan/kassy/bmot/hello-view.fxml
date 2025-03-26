@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="bahou.akandan.kassy.bmot.HelloController"
+            stylesheets="@styles.css"
+            prefHeight="800"
+            prefWidth="1200">
+    <top>
+        <HBox styleClass="top-bar">
+            <Label text="Google Meet" styleClass="app-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Nouvelle réunion" styleClass="new-meeting-btn"/>
+            <Button text="Rejoindre" styleClass="join-btn"/>
+            <ImageView fx:id="userAvatar" fitHeight="40" fitWidth="40">
+                <Image url="@/images/user-avatar.png"/>
+            </ImageView>
+        </HBox>
+    </top>
+
+    <!-- Contenu principal -->
+    <center>
+        <HBox>
+            <!-- Zone principale de la vidéo -->
+            <VBox HBox.hgrow="ALWAYS" styleClass="video-container">
+                <!-- Flux vidéo principal -->
+                <ImageView fx:id="mainVideoStream" fitHeight="600" fitWidth="800" preserveRatio="true">
+                    <Image url="@/images/main-video-placeholder.png"/>
+                </ImageView>
+
+                <!-- Contrôles de la réunion -->
+                <HBox styleClass="meeting-controls">
+                    <Button fx:id="micToggle" styleClass="control-btn">
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/images/mic-on.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="cameraToggle" styleClass="control-btn">
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/images/camera-on.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="shareScreenBtn" styleClass="control-btn">
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/images/screen-share.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="endCallBtn" text="Terminer" styleClass="end-call-btn"/>
+                </HBox>
+            </VBox>
+
+            <!-- Panneau latéral des participants -->
+            <VBox styleClass="participants-panel" minWidth="300">
+                <HBox styleClass="panel-header">
+                    <Label text="Participants" styleClass="panel-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="+" styleClass="add-participant-btn"/>
+                </HBox>
+
+                <!-- Liste des participants -->
+                <ListView fx:id="participantsList" VBox.vgrow="ALWAYS">
+                    <!-- Les participants seront ajoutés dynamiquement par le contrôleur -->
+                </ListView>
+
+                <!-- Chat intégré -->
+                <VBox styleClass="chat-container">
+                    <Label text="Chat" styleClass="chat-title"/>
+                    <ScrollPane VBox.vgrow="ALWAYS">
+                        <ListView fx:id="chatMessages"/>
+                    </ScrollPane>
+                    <HBox styleClass="chat-input-container">
+                        <TextField fx:id="chatInput" HBox.hgrow="ALWAYS" promptText="Envoyer un message"/>
+                        <Button text="Envoyer" styleClass="send-chat-btn"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

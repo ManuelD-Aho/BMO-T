@@ -1,0 +1,10 @@
+
+services:
+  bmo-t-app:
+    build: .
+    container_name: bmo_t_app
+    ports:
+      - "5002:5002"
+    restart: always
+    environment:
+      - JAVA_OPTS=-Xmx512m
